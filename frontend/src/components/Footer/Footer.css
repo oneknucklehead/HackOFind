@@ -1,0 +1,9 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.footer__text {
+  font-weight: 600;
+  font-size: 20px;
+}
