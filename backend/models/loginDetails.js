@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
+
 const loginSchema = mongoose.Schema(
   {
     name: {
@@ -13,14 +15,22 @@ const loginSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    confirmPassword: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,
   }
 )
+
+loginSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password)
+}
+
+loginSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) next()
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+})
+
 const LoginUser = mongoose.model('LoginUser', loginSchema)
+
 export default LoginUser
