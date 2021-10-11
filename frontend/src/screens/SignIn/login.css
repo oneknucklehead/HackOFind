@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   /* background: rgb(95, 77, 77); */
+  flex-direction: column;
   background: linear-gradient(20deg, #c91954, salmon);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
@@ -30,7 +31,7 @@
 .loginContainer .userContainer input {
   width: 100%;
   padding: 10px 0;
-  font-size: 25px;
+  font-size: 22px;
   color: #fff;
   margin-bottom: 30px;
   border: none;
@@ -62,6 +63,7 @@
   margin: 10px auto 20px;
   border: none;
   border-radius: 10px;
+  background: #fff;
   font-size: 20px;
   font-weight: 600;
   color: #c91954;
@@ -73,4 +75,14 @@
   color: #fff;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.164);
   transition: all 0.3s ease-in-out;
+}
+
+.redirect {
+  margin: 10px auto 30px;
+  font-size: 18px;
+  color: #fff;
+}
+.redirect span {
+  color: #fff;
+  text-decoration: underline;
 }
