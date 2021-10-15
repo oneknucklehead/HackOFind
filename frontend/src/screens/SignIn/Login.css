@@ -1,0 +1,88 @@
+.formElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: rgb(95, 77, 77); */
+  flex-direction: column;
+  background: linear-gradient(20deg, #c91954, salmon);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  width: 500px;
+}
+.loginContainer h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  color: #fff;
+  margin-top: 30px;
+  font-size: 35px;
+  letter-spacing: 1px;
+}
+.loginContainer .userContainer {
+  position: relative;
+}
+.loginContainer .userContainer input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.loginContainer .userContainer label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 20px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.loginContainer .userContainer input:focus ~ label,
+.loginContainer .userContainer input:valid ~ label {
+  top: -25px;
+  left: 0;
+  color: #242424;
+  font-size: 18px;
+  font-weight: 600;
+}
+.button {
+  height: 50px;
+  width: 100%;
+  margin: 10px auto 20px;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  color: #c91954;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.button:hover {
+  background: linear-gradient(45deg, salmon, #c91954);
+  color: #fff;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.164);
+  transition: all 0.3s ease-in-out;
+}
+
+.redirect {
+  margin: 10px auto 30px;
+  font-size: 18px;
+  color: #fff;
+}
+.redirect span {
+  color: #fff;
+  text-decoration: underline;
+}
