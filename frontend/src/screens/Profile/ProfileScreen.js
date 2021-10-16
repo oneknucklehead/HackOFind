@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { TextField } from '@mui/material'
 import './ProfileScreen.css'
+import Cropper from 'react-easy-crop'
+import Slider from '@mui/material/Slider'
+import { Button } from '@mui/material'
+
 const ProfileScreen = () => {
+  const inputRef = useRef()
+  const triggerFileSelectPopup = () => inputRef.current.click()
+
   const dispatch = useDispatch()
 
   const userLogin = useSelector((state) => state.userLogin)
+  //profile details
   const { loading, error, userInfo } = userLogin
   const name = userInfo.name
   const email = userInfo.email
@@ -14,11 +21,70 @@ const ProfileScreen = () => {
   const [github, setGithub] = useState('')
   const [blogs, setBlogs] = useState('')
   const [twitter, setTwitter] = useState('')
+  //image crop constants
+  const profileDefault = userInfo.imageUrl
+    ? userInfo.imageUrl
+    : 'https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png'
+
+  const [image, setImage] = useState(profileDefault)
+  const [croppedArea, setCroppedArea] = useState(null)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState(1)
+
+  //crop image functions
+  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+    setCroppedArea(croppedAreaPixels)
+  }
+  const fileSelectHandler = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImage(reader.result)
+        }
+      }
+      reader.readAsDataURL(e.target.files[0])
+    }
+  }
 
   return (
     <>
       <form className='profileForm'>
-        <input type='file'></input>
+        {image ? (
+          <div style={{ backgroundImage: `url(${image})` }} className='preview'>
+            <Cropper
+              image={image}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+            />
+            <Slider
+              size='small'
+              defaultValue={70}
+              aria-label='Small'
+              valueLabelDisplay='auto'
+            />
+          </div>
+        ) : (
+          ''
+        )}
+        <input
+          type='file'
+          onChange={fileSelectHandler}
+          accept='image/*'
+          ref={inputRef}
+          style={{ display: 'none' }}
+        ></input>
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={triggerFileSelectPopup}
+        >
+          Upload
+        </Button>
         <h2>Details:</h2>
         <div className='profileContainer'>
           <input

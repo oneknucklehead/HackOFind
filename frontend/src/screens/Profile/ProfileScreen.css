@@ -46,3 +46,10 @@ h2 {
   margin-bottom: 30px;
   color: #242424;
 }
+.preview {
+  width: 150px;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 100%;
+}
